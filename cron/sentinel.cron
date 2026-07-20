@@ -1,0 +1,18 @@
+# ============================================================
+# sentinel.cron — automation schedule installed by setup.sh
+# using `crontab` (root's personal crontab), not /etc/cron.d.
+# Format: minute hour day month weekday  command
+# ============================================================
+MAILTO=""
+
+# Full backup every night at 1:45 AM
+45 1 * * *    /opt/sentinel-toolkit/modules/backup.sh
+
+# Purge stale logs every Sunday at 4:00 AM
+0 4 * * 0     /opt/sentinel-toolkit/modules/logclean.sh
+
+# Watchdog sweep every 5 minutes
+*/5 * * * *   /opt/sentinel-toolkit/modules/servicecheck.sh
+
+# Disk + inode check every 10 minutes
+*/10 * * * *  /opt/sentinel-toolkit/modules/diskalert.sh
